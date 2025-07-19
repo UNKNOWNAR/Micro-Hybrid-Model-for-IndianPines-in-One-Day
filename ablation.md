@@ -1,8 +1,7 @@
 # **Ablation and Comparison Report**
 
-**Author:** Arinjay Sarkar
-
-**Date:** July 19, 2025
+Author: Arinjay Sarkar  
+Date: July 19, 2025
 
 ## **1\. Introduction**
 
@@ -37,10 +36,6 @@ The experimental results provide a clear narrative on the effectiveness of diffe
 
 The baseline 3D-CNN achieved only moderate success (OA: 0.5218). Its performance was hampered by the significant class imbalance in the Indian Pines dataset. The model tended to favor majority classes, resulting in poor F1-scores for rare classes and a low Average Accuracy.
 
-### **Why Initial Hybrid Models Failed**
-
-Initial attempts to integrate advanced components (un-tuned self-attention, GCN, and GRU models) resulted in severe performance degradation and model collapse. These more complex architectures proved to be highly unstable during training with standard hyperparameters. They failed to learn meaningful features and defaulted to predicting only one or two of the most dominant classes.
-
 ### **Why the Final Hybrid Model Succeeded**
 
 The success of the **Improved Hybrid CNN with Attention** can be attributed to three key factors:
@@ -48,6 +43,10 @@ The success of the **Improved Hybrid CNN with Attention** can be attributed to t
 1. **Self-Attention Mechanism**: This allowed the model to dynamically weigh the importance of different spatio-spectral features within a patch, effectively learning to focus on the most discriminative information for each class.  
 2. **Normalization (BatchNorm)**: The addition of a BatchNorm2d layer immediately before the attention block was the most critical improvement. It stabilized the feature distributions, preventing the training instability and model collapse observed in earlier attempts.  
 3. **Hyperparameter Tuning**: A lower learning rate (0.0005) and an increased number of epochs (50) gave the more complex model sufficient time to converge to a robust and effective solution.
+
+### **Other Explored Architectures**
+
+As part of this investigation, models incorporating a Graph Convolutional Network (GCN) and a recursive gating mechanism (CNN-GRU) were also implemented and tested. While these experiments were valuable, both architectures exhibited severe training instability and model collapse, even after tuning. Their performance was significantly lower than the baseline, highlighting the challenge of applying these complex structures to this specific dataset without more advanced architectural modifications. Therefore, the primary analysis focuses on the successful self-attention model.
 
 ## **5\. Conclusion**
 
